@@ -3,7 +3,7 @@ require_once "Mage/Contacts/controllers/IndexController.php";
 
 class Guru_Contacts_IndexController extends Mage_Contacts_IndexController
 {
-	private $_emailer; 
+    private $_emailer; 
 	
     public function indexAction()
     {
@@ -95,31 +95,30 @@ class Guru_Contacts_IndexController extends Mage_Contacts_IndexController
 	
     private function _upload($j)
 	{ 
-		try {
-			$fileName       =  $_FILES['attachment']['name'][$j];
-			$fileExt        = strtolower(substr(strrchr($fileName, ".") ,1));
-			$fileNamewoe    = rtrim($fileName, $fileExt);
-			$fileName       = preg_replace('/\s+', '', $fileNamewoe) . time() . '.' . $fileExt;
-			$uploader       = new Varien_File_Uploader(array(
-									'name' => $_FILES['attachment']['name'][$j],
-									'type' => $_FILES['attachment']['type'][$j],
-									'tmp_name' => $_FILES['attachment']['tmp_name'][$j],
-									'error' => $_FILES['attachment']['error'][$j],
-									'size' => $_FILES['attachment']['size'][$j]
-							  ));
-			$uploader->setAllowedExtensions(array('jpg','jpeg','gif','png'));
-			$uploader->setAllowRenameFiles(true);
-			$uploader->setFilesDispersion(false);
-			$path = Mage::getBaseDir('media') . DS . 'contacts';
-			if(!is_dir($path)){
-				mkdir($path, 0777, true);
-			}
-			$uploader->save($path . DS, $fileName );
-
+	   try {
+		$fileName       =  $_FILES['attachment']['name'][$j];
+		$fileExt        = strtolower(substr(strrchr($fileName, ".") ,1));
+		$fileNamewoe    = rtrim($fileName, $fileExt);
+		$fileName       = preg_replace('/\s+', '', $fileNamewoe) . time() . '.' . $fileExt;
+		$uploader       = new Varien_File_Uploader(array(
+								'name' => $_FILES['attachment']['name'][$j],
+								'type' => $_FILES['attachment']['type'][$j],
+								'tmp_name' => $_FILES['attachment']['tmp_name'][$j],
+								'error' => $_FILES['attachment']['error'][$j],
+								'size' => $_FILES['attachment']['size'][$j]
+						  ));
+		$uploader->setAllowedExtensions(array('jpg','jpeg','gif','png'));
+		$uploader->setAllowRenameFiles(true);
+		$uploader->setFilesDispersion(false);
+		$path = Mage::getBaseDir('media') . DS . 'contacts';
+		if(!is_dir($path)){
+			mkdir($path, 0777, true);
+		}
+		$uploader->save($path . DS, $fileName );
 		} catch (Exception $e) {
 			
-			Mage::getSingleton('customer/session')->addError(Mage::helper('contacts')->__('Please upload right file type. Right  file types are png, jpeg,jpg'));
-		
+          		Mage::getSingleton('customer/session')->addError(Mage::helper('contacts')->__('Please upload right file type. Right  file types are png, jpeg,jpg'));
+	
 			$this->_redirect('*/*/');
 			return;
 		}
