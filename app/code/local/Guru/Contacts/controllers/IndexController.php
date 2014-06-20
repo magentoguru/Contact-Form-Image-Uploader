@@ -5,7 +5,6 @@ class Guru_Contacts_IndexController extends Mage_Contacts_IndexController
 {
 	private $_emailer; 
 	
-	
     public function indexAction()
     {
         $this->loadLayout();
@@ -55,21 +54,9 @@ class Guru_Contacts_IndexController extends Mage_Contacts_IndexController
 				if (is_array($_FILES['attachment']['name'])) {
 					for($j=0; $j<count($_FILES['attachment']['name']); $j++) {
 						$this->_upload($j);
-						
-						
-						
 					}
 				}
 				
-				
-                /**************************************************************/
- 
-                /* @var $mailTemplate Mage_Core_Model_Email_Template */
- 
-                /**************************************************************/
-                //sending file as attachment
-                /**************************************************************/
- 
                 $this->_emailer->setDesignConfig(array('area' => 'frontend'))
                     ->setReplyTo($post['email'])
                     ->sendTransactional(
@@ -113,14 +100,13 @@ class Guru_Contacts_IndexController extends Mage_Contacts_IndexController
 			$fileExt        = strtolower(substr(strrchr($fileName, ".") ,1));
 			$fileNamewoe    = rtrim($fileName, $fileExt);
 			$fileName       = preg_replace('/\s+', '', $fileNamewoe) . time() . '.' . $fileExt;
-			// print_r($_FILES);die;
 			$uploader       = new Varien_File_Uploader(array(
-    'name' => $_FILES['attachment']['name'][$j],
-    'type' => $_FILES['attachment']['type'][$j],
-    'tmp_name' => $_FILES['attachment']['tmp_name'][$j],
-    'error' => $_FILES['attachment']['error'][$j],
-    'size' => $_FILES['attachment']['size'][$j]
-        ));
+									'name' => $_FILES['attachment']['name'][$j],
+									'type' => $_FILES['attachment']['type'][$j],
+									'tmp_name' => $_FILES['attachment']['tmp_name'][$j],
+									'error' => $_FILES['attachment']['error'][$j],
+									'size' => $_FILES['attachment']['size'][$j]
+							  ));
 			$uploader->setAllowedExtensions(array('jpg','jpeg','gif','png'));
 			$uploader->setAllowRenameFiles(true);
 			$uploader->setFilesDispersion(false);
