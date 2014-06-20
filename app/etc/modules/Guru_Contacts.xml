@@ -1,0 +1,11 @@
+<config>
+	<modules>
+    	<Guru_Contacts>
+      		<active>true</active>
+      		<codePool>local</codePool>
+			<depends><Mage_Contacts/></depends>
+    	</Guru_Contacts>
+  	</modules>
+</config>
+
+

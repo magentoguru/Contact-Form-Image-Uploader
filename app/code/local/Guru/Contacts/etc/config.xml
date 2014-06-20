@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<modules>
+		<Guru_Contacts>
+			<version>0.1.0</version>
+		</Guru_Contacts>		
+	</modules>
+	
+	<frontend>
+		<routers>
+			<contacts>
+				<use>standard</use>
+				<args>
+					<module>Guru_Contacts</module>				
+					<frontName>contacts</frontName>	
+				</args>
+			</contacts>	
+			
+			<contacts>
+				<args>
+					<modules>
+						<Guru_Contacts before="Mage_Contacts">Guru_Contacts</Guru_Contacts>
+					</modules>	
+				</args>
+			</contacts>
+		</routers>	
+		
+        <layout>
+            <updates>
+                <contacts>
+                    <file>contacts.xml</file>
+                </contacts>
+            </updates>
+        </layout>
+		
+	</frontend>
+	
+	
+	
+	
+</config>
+
