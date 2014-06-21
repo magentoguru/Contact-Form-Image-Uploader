@@ -130,7 +130,7 @@ class Guru_Contacts_IndexController extends Mage_Contacts_IndexController
 			if(file_exists($attachmentFilePath)){
 				$fileContents = file_get_contents($attachmentFilePath);
 				$attachment   = $this->_emailer->getMail()->createAttachment($fileContents);
-				$attachment->filename[] = $fileName;
+				$attachment->filename = $fileName;
 			}
 		} catch ( Exception $e) {
 			
